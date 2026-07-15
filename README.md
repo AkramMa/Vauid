@@ -1,6 +1,6 @@
 # VauID — Password Manager
 
-A secure, cross-platform Electron password manager backed by the KeePass `.kdbx`
+A secure, cross-platform Electron password manager `
 format (Argon2id + AES-256-GCM), with a companion browser extension for autofill.
 
 ---
