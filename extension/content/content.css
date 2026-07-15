@@ -1,0 +1,457 @@
+/* ── VauID autofill menu ──────────────────────────────────────────────── */
+
+@keyframes vauid-slide-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#vauid-autofill-menu {
+  background: #2D2D2A;
+  border: 1px solid #3D3D37;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.3);
+  overflow: hidden;
+  animation: vauid-slide-in 0.14s ease forwards;
+}
+
+/* ── Header ───────────────────────────────────────────────────────── */
+
+#vauid-autofill-menu .vauid-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 9px;
+  border-bottom: 1px solid #3D3D37;
+}
+
+#vauid-autofill-menu .vauid-menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #B3AFA0;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#vauid-autofill-menu .vauid-close-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: none;
+  color: #7D7A6E;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+  padding: 0;
+}
+#vauid-autofill-menu .vauid-close-btn:hover {
+  background: rgba(255,255,255,0.13);
+  color: #F2F0E6;
+}
+
+/* ── Item list ───────────────────────────────────────────────────────── */
+
+#vauid-autofill-menu .vauid-item-list {
+  max-height: 244px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+#vauid-autofill-menu .vauid-item-list::-webkit-scrollbar { width: 3px; }
+#vauid-autofill-menu .vauid-item-list::-webkit-scrollbar-track { background: transparent; }
+#vauid-autofill-menu .vauid-item-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+}
+
+/* ── Individual item ───────────────────────────────────────────────────── */
+
+#vauid-autofill-menu .vauid-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.1s;
+}
+#vauid-autofill-menu .vauid-item:last-child { border-bottom: none; }
+#vauid-autofill-menu .vauid-item:hover {
+  background: rgba(217,119,87,0.08);
+}
+#vauid-autofill-menu .vauid-item:hover .vauid-item-dots { opacity: 1; }
+
+/* compact avatar/favicon icon — 28px, matches the class name JS actually renders (.vauid-item-avatar, not the old .vauid-item-favicon) */
+#vauid-autofill-menu .vauid-item-avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  overflow: hidden;
+  background: #3A3A34;
+  box-sizing: border-box;
+}
+#vauid-autofill-menu .vauid-item-avatar img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+  display: block;
+}
+
+/* text */
+#vauid-autofill-menu .vauid-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#vauid-autofill-menu .vauid-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #F2F0E6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+#vauid-autofill-menu .vauid-item-user {
+  font-size: 11px;
+  font-weight: 400;
+  color: #7D7A6E;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+/* three-dot button */
+#vauid-autofill-menu .vauid-item-dots {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  color: #7D7A6E;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.12s, background 0.12s, color 0.12s;
+  padding: 0;
+}
+#vauid-autofill-menu .vauid-item-dots:hover {
+  background: rgba(255,255,255,0.08);
+  color: #B3AFA0;
+}
+
+/* email-step hint */
+#vauid-autofill-menu .vauid-email-hint {
+  padding: 5px 12px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #eab308;
+  background: rgba(234,179,8,0.08);
+  border-bottom: 1px solid rgba(234,179,8,0.14);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ── VauID save/update credential banner — modern toast ──────────────────────── */
+
+@keyframes vsb-slide-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)     scale(1); }
+}
+
+@keyframes vsb-slide-out {
+  from { opacity: 1; transform: translateY(0)     scale(1); }
+  to   { opacity: 0; transform: translateY(-10px) scale(0.96); }
+}
+
+@keyframes vsb-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@keyframes vsb-spin {
+  to { transform: rotate(360deg); }
+}
+
+#vauid-save-banner {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  width: 320px;
+  background: #2D2D2A;
+  border: 1px solid #3D3D37;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(217,119,87,0.14),
+    0 20px 60px rgba(0,0,0,0.7),
+    0 4px 16px rgba(0,0,0,0.4);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #F2F0E6;
+  animation: vsb-slide-in 0.22s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+  overflow: hidden;
+}
+
+/* Header row */
+#vauid-save-banner .vsb-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 12px 0;
+}
+
+#vauid-save-banner .vsb-favicon {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+#vauid-save-banner .vsb-brand {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #E8916F;
+  flex: 1;
+}
+
+#vauid-save-banner .vsb-close {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(239,68,68,0.1);
+  color: #ef4444;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color .12s, background .12s;
+}
+
+#vauid-save-banner .vsb-close:hover {
+  background: rgba(239,68,68,0.2);
+  color: #f87171;
+}
+
+/* Content area */
+#vauid-save-banner .vsb-content {
+  padding: 8px 12px 10px;
+}
+
+#vauid-save-banner .vsb-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #B3AFA0;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+#vauid-save-banner .vsb-host {
+  color: #E8916F;
+  font-weight: 600;
+}
+
+#vauid-save-banner .vsb-user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #7D7A6E;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action buttons */
+#vauid-save-banner .vsb-actions {
+  display: flex;
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+#vauid-save-banner .vsb-stack {
+  flex-direction: column;
+}
+
+#vauid-save-banner .vsb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, opacity .15s;
+  line-height: 1;
+}
+
+#vauid-save-banner .vsb-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
+
+#vauid-save-banner .vsb-primary {
+  background: #D97757;
+  color: #fff;
+  flex: 1;
+}
+#vauid-save-banner .vsb-primary:hover:not(:disabled) { background: #E8916F; }
+
+#vauid-save-banner .vsb-secondary {
+  background: rgba(217,119,87,0.14);
+  color: #E8916F;
+  border: 1px solid rgba(217,119,87,0.3);
+}
+#vauid-save-banner .vsb-secondary:hover:not(:disabled) { background: rgba(217,119,87,0.24); }
+
+#vauid-save-banner .vsb-ghost {
+  background: rgba(255,255,255,0.04);
+  color: #7D7A6E;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+#vauid-save-banner .vsb-ghost:hover:not(:disabled) { background: rgba(255,255,255,0.08); color: #B3AFA0; }
+
+/* Spinner inside button */
+#vauid-save-banner .vsb-spinner {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: vsb-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Auto-dismiss progress bar */
+#vauid-save-banner .vsb-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #D97757, #E8916F);
+  border-radius: 14px 14px 0 0;
+  animation: vsb-progress 25s linear forwards;
+  transform-origin: left;
+}
+
+/* Feedback state */
+#vauid-save-banner .vsb-feedback-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+
+#vauid-save-banner .vsb-feedback-msg {
+  font-size: 13px;
+  font-weight: 500;
+  color: #F2F0E6;
+}
+
+#vauid-save-banner .vsb-feedback-msg.vsb-error {
+  color: #ef4444;
+}
+
+/* ── VauID persistent input icon ─────────────────────────────────────────────── */
+
+.vauid-input-icon {
+  all: unset;
+  box-sizing: border-box !important;
+  position: fixed !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: #6B4030 !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+  z-index: 2147483646 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.08) !important;
+  transition: background 0.15s, transform 0.12s, box-shadow 0.15s !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  font-size: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.vauid-input-icon:hover {
+  background: #7A4A38 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 16px rgba(217,119,87,0.4), 0 0 0 2px rgba(255,255,255,0.12) !important;
+}
+
+.vauid-input-icon:focus-visible {
+  outline: 2px solid #E8916F !important;
+  outline-offset: 2px !important;
+}
+
+.vauid-input-icon svg {
+  flex-shrink: 0 !important;
+  pointer-events: none !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* (autofill menu count, list & scrollbar styles moved to the main menu block above) */
+
+/* ── Never-save button style ─────────────────────────────────────────────────── */
+
+#vauid-save-banner .vsb-never {
+  font-size: 11px;
+  color: #7D7A6E;
+  padding: 4px 8px;
+}
+
+#vauid-save-banner .vsb-never:hover:not(:disabled) {
+  color: #ef4444;
+  background: rgba(239,68,68,0.08);
+}

@@ -1,0 +1,39 @@
+directories:
+  output: dist
+  buildResources: build
+asar: true
+asarUnpack:
+  - '**/*.node'
+appId: com.vauid.app
+productName: VauID
+copyright: Copyright © 2025 VauID
+fileAssociations:
+  - ext: vauid
+    name: VauID Vault
+    description: VauID Password Vault
+    icon: assets/vault-icon
+  - ext: kdbx
+    name: KeePass Database
+    description: KeePass / VauID Vault
+    icon: assets/vault-icon
+win:
+  target:
+    - nsis
+  icon: assets/icon.ico
+mac:
+  target:
+    - dmg
+  icon: assets/icon.icns
+linux:
+  target:
+    - AppImage
+  icon: assets/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: VauID
+  deleteAppDataOnUninstall: false
+files: []
+electronVersion: 36.9.5

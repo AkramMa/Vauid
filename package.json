@@ -1,0 +1,85 @@
+{
+  "name": "vauid",
+  "version": "1.2.0",
+  "description": "Secure cross-platform password manager with end-to-end encryption",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": [
+    "password-manager",
+    "security",
+    "encryption"
+  ],
+  "author": "VauID",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "0.8.13",
+    "argon2": "^0.44.0",
+    "kdbxweb": "^2.1.1",
+    "node-fetch": "^2.7.0",
+    "qrcode": "^1.5.4",
+    "ws": "^8.20.0"
+  },
+  "build": {
+	  "asar": true,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "appId": "com.vauid.app",
+    "productName": "VauID",
+    "copyright": "Copyright © 2025 VauID",
+    "fileAssociations": [
+      {
+        "ext": "vauid",
+        "name": "VauID Vault",
+        "description": "VauID Password Vault",
+        "icon": "assets/vault-icon"
+      },
+      {
+        "ext": "kdbx",
+        "name": "KeePass Database",
+        "description": "KeePass / VauID Vault",
+        "icon": "assets/vault-icon"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+  "oneClick": false,
+  "allowToChangeInstallationDirectory": true,
+  "createDesktopShortcut": true,
+  "createStartMenuShortcut": true,
+  "shortcutName": "VauID",
+  "deleteAppDataOnUninstall": false
+    }
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.8.13"
+  }
+}
