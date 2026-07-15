@@ -1,4 +1,4 @@
-# Keybek (VauID) — Password Manager
+# VauID — Password Manager
 
 A secure, cross-platform Electron password manager backed by the KeePass `.kdbx`
 format (Argon2id + AES-256-GCM), with a companion browser extension for autofill.
